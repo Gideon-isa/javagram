@@ -4,6 +4,10 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.gideon.validation.Age;
+import com.gideon.validation.Username;
+
+import jakarta.validation.Constraint;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
@@ -19,12 +23,15 @@ public class User {
 
     @NotBlank(message = "Username cannot be blank")
     @Size(min = 7, message = "Username is too short")
+    @Username(message = "Cannot contain special characters or uppercase characters ")
     private String userName;
 
     private String email;
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Past(message = "date of birth must be in the past")
+
+    @Age(message = "Must be at least 18")
     private Date dateOfBirth;
 
 
