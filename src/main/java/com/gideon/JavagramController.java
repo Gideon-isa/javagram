@@ -27,8 +27,18 @@ public class JavagramController {
     @PostMapping("/submitItem")
     public String handleSubmit(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            
+            if (user.getFirstName().equals(user.getLastName())) {
+                bindingResult.rejectValue("lastName", "", null, "please enter valid");
+            }
+            
             return "sign-up";
         }
+        // if (user.getFirstName().equals(user.getLastName())) {
+        //     bindingResult.rejectValue("lastName", "", null, "please enter valid");
+        //     return "sign-up";
+        // }
+        
         return "redirect:/result";
     }
 }
